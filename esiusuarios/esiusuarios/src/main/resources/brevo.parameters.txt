@@ -1,0 +1,16 @@
+{
+  "endpoint":"https://api.brevo.com/v3/smtp/email",
+
+  "headers":[
+    "accept: application/json",
+    "api-key: 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",
+    "content-type: application/json"
+  ],
+
+  "sender":{
+    "name":"ines",
+    "email":"ines12042@gmail.com"
+  },
+
+  "subject":"Confirma tu cuenta"
+}

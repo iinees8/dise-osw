@@ -1,0 +1,36 @@
+.contenedor-entradas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.entrada-card {
+  width: 200px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.entrada-card button {
+  margin-top: 10px;
+  background: #0052cc;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.stripe-box {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#card-element {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+}

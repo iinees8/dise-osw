@@ -1,0 +1,33 @@
+<h2 class="titulo">Resultados</h2>
+
+<div class="contenedor-cards">
+
+  <div class="card" *ngFor="let e of espectaculosFiltrados">
+
+    <div class="card-info">
+      <h3>{{e.artista}}</h3>
+      <p class="fecha">{{e.fecha}}</p>
+      <p class="escenario">{{e.escenario}}</p>
+    </div>
+
+    <div class="card-acciones">
+
+      <button (click)="verEntradas(e)">
+        Ver entradas
+      </button>
+
+      <div *ngIf="e.entradas" class="info-entradas">
+        <p>
+          {{e.entradasLibres}} libres de {{e.entradas.total}}
+        </p>
+
+        <button class="btn-compra" (click)="irAComprarEntradas()">
+          Comprar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

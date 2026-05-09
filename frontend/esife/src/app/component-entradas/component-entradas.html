@@ -1,0 +1,49 @@
+<div class="detalle">
+
+  <h1>{{espectaculo.artista}}</h1>
+
+  <p>{{espectaculo.fecha}}</p>
+  <p>{{espectaculo.escenario}}</p>
+
+  <!-- 🔢 RESUMEN -->
+  <div *ngIf="entradas" class="info">
+
+    <p>Total: {{entradas.total}}</p>
+    <p>Libres: {{entradas.libres}}</p>
+    <p>Reservadas: {{entradas.reservadas}}</p>
+    <p>Vendidas: {{entradas.vendidas}}</p>
+
+
+  </div>
+
+  <!-- 🔥 AQUÍ VA LO NUEVO -->
+  <h2>Entradas disponibles</h2>
+
+  <div class="contenedor-entradas">
+
+    <div class="entrada-card" *ngFor="let e of entradasDisponibles">
+
+      <p><strong>Precio:</strong> {{e.precio}} €</p>
+
+      <!-- 🎭 TEATRO -->
+      <p *ngIf="e.tipoEntrada == 1">
+        🎭 {{e.ubicacion}}
+      </p>
+
+      <!-- 🎤 ZONA -->
+      <p *ngIf="e.tipoEntrada == 0">
+        🎤 {{e.ubicacion}}
+      </p>
+
+      <button
+  [disabled]="e.estado == 'RESERVADA'"
+  (click)="agregarAlCarrito(e)"
+>
+  {{e.estado == 'RESERVADA' ? 'Reservada' : '🛒 Añadir'}}
+</button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,15 @@
+<html>
+<body>
+
+<h2>Bienvenido a Esientradas</h2>
+
+<p>Pulsa el enlace para activar tu cuenta:</p>
+
+<p>
+<a href="http://localhost:8081/users/confirm/#TOKEN#">
+Confirmar cuenta
+</a>
+</p>
+
+</body>
+</html>

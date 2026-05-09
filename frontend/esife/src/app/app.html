@@ -1,0 +1,306 @@
+<header class="header">
+
+  <!-- 🔝 TOP BAR -->
+  <div class="top-bar">
+
+    <!-- 🎟️ LOGO -->
+    <span class="logo">
+      🎟️ Esientradas
+    </span>
+
+    <!-- 🛒 CARRITO -->
+    <div
+      class="carrito-icono"
+      (click)="abrirCarrito()"
+    >
+
+      🛒
+
+      <span class="contador-carrito">
+        {{(carritoService.carrito$ | async)?.length || 0}}
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- 🔍 BUSCADOR -->
+  <div class="search-bar">
+
+    <input
+      type="date"
+      [(ngModel)]="fecha"
+    >
+
+    <input
+      type="text"
+      placeholder="Artista, Evento o Recinto"
+      [(ngModel)]="busqueda"
+    >
+
+    <button (click)="buscar()">
+      Buscar
+    </button>
+
+  </div>
+
+</header>
+
+<!-- 🌑 MODAL CARRITO -->
+<div
+  class="modal"
+  *ngIf="mostrarCarrito"
+>
+
+  <div class="carrito-moderno">
+
+    <!-- ❌ -->
+    <span
+      class="cerrar"
+      (click)="cerrarCarrito()"
+    >
+      ✖
+    </span>
+
+    <!-- 🛒 TITULO -->
+    <h2 class="titulo-carrito">
+      🛒 Tu carrito
+    </h2>
+
+    <!-- 🎫 ENTRADAS -->
+    <div
+      class="entrada-carrito"
+      *ngFor="let e of carritoService.carrito$ | async"
+    >
+
+      <div class="entrada-info">
+
+        <h4>
+          {{e.artista}}
+        </h4>
+
+        <p>
+          📍 {{e.ubicacion || e.zona || 'Zona'}}
+        </p>
+
+      </div>
+
+      <div class="entrada-precio">
+
+        {{e.precio / 100}}€
+
+      </div>
+
+    </div>
+
+    <!-- 💰 TOTAL -->
+    <div class="total-carrito">
+
+      <span>Total:</span>
+
+      <strong>
+
+        {{
+          (
+            (carritoService.carrito$ | async)?.reduce(
+              (acc, e) => acc + (e.precio / 100),
+              0
+            ) || 0
+          )
+        }}€
+
+      </strong>
+
+    </div>
+
+    <hr>
+
+    <!-- 🔐 LOGIN -->
+    <h3 class="subtitulo">
+      🔐 Login
+    </h3>
+
+    <input
+      class="input-moderno"
+      type="text"
+      placeholder="Usuario"
+      [(ngModel)]="usuario"
+    >
+
+    <input
+      class="input-moderno"
+      type="password"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+    >
+
+    <!-- 🔘 BOTONES -->
+    <div class="botones-login">
+
+      <button
+        class="btn-azul"
+        (click)="login()"
+      >
+        Iniciar sesión
+      </button>
+
+      <button
+        class="btn-gris"
+        (click)="logout()"
+      >
+        Cerrar sesión
+      </button>
+
+    </div>
+
+    <hr>
+
+    <!-- 🆕 REGISTRO -->
+    <button
+      class="btn-registro"
+      (click)="abrirRegistro()"
+    >
+      Crear cuenta
+    </button>
+
+    <hr>
+
+    <!-- 💳 PAGAR -->
+    <button
+      class="btn-pagar"
+      (click)="pagarCarrito()"
+    >
+      💳 Pagar carrito
+    </button>
+
+    <!-- 💳 STRIPE -->
+    <form
+      id="payment-form"
+      style="display:none"
+      (submit)="confirmarPago(); $event.preventDefault()"
+    >
+
+      <!-- 🏷️ -->
+      <h3 class="stripe-title">
+        Payment Details
+      </h3>
+
+      <!-- 💳 -->
+      <div class="stripe-card-box">
+
+        <div id="card-element"></div>
+
+      </div>
+
+      <!-- ❌ -->
+      <p id="card-error"></p>
+
+      <!-- 🔘 -->
+      <div class="stripe-buttons">
+
+        <!-- ✅ -->
+        <button
+          id="submit"
+          type="submit"
+          class="btn-confirmar"
+        >
+
+          CONFIRM AND PAY
+
+        </button>
+
+        <!-- ❌ -->
+        <button
+          type="button"
+          class="btn-cancelar"
+          (click)="clientSecret=''"
+        >
+
+          CANCEL
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- 🆕 MODAL REGISTRO -->
+<div
+  class="modal"
+  *ngIf="mostrarRegistro"
+>
+
+  <div class="carrito-moderno">
+
+    <!-- ❌ -->
+    <span
+      class="cerrar"
+      (click)="cerrarRegistro()"
+    >
+      ✖
+    </span>
+
+    <!-- 🆕 -->
+    <h2 class="titulo-carrito">
+      🆕 Registro
+    </h2>
+
+    <!-- 👤 -->
+    <input
+      class="input-moderno"
+      type="text"
+      placeholder="Nombre"
+      [(ngModel)]="registroNombre"
+    >
+
+    <!-- 📧 -->
+    <input
+      class="input-moderno"
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="registroEmail"
+    >
+
+    <!-- 🔑 -->
+    <input
+      class="input-moderno"
+      type="password"
+      placeholder="Contraseña"
+      [(ngModel)]="registroPwd1"
+    >
+
+    <!-- 🔑 -->
+    <input
+      class="input-moderno"
+      type="password"
+      placeholder="Repetir contraseña"
+      [(ngModel)]="registroPwd2"
+    >
+
+    <!-- 🔘 -->
+    <button
+      class="btn-pagar"
+      (click)="registrar()"
+    >
+      Crear cuenta
+    </button>
+
+  </div>
+
+</div>
+
+<!-- 🔄 -->
+<router-outlet></router-outlet>
+
+<!-- 🔻 FOOTER -->
+<footer class="footer">
+
+  <p>
+    &copy; 2024 Espectáculos Inc.
+  </p>
+
+</footer>
