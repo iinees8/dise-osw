@@ -3,7 +3,7 @@
 
   "headers":[
     "accept: application/json",
-    "api-key: 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",
+    "api-key: TU_API_KEY",
     "content-type: application/json"
   ],
 

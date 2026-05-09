@@ -14,7 +14,7 @@ import org.json.*;
 @Service
 public class PagosService {
     static {
-        Stripe.apiKey = "sk_test_51T92jARWJutHSGUGTj0Sv0Kx9r3sCL7xdb9vZTnnXEf1NHhhwFtRkfKg3HxMVRTbmVNIOmcSMHCg00d50oRx9Gdj00lNH3itUo";
+        Stripe.apiKey = "TU_STRIPE_KEY";
     }
 
     public String prepararPago(Long centimos)  throws StripeException {
